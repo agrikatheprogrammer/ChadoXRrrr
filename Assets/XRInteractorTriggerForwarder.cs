@@ -3,10 +3,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRInteractorTriggerForwarder : MonoBehaviour
 {
-    public XRBaseInteractor interactor;
+    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor;
     void Awake()
     {
-        if (interactor == null) interactor = GetComponent<XRBaseInteractor>();
+        if (interactor == null) interactor = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor>();
         if (interactor != null)
         {
             interactor.selectEntered.AddListener(OnSelectEntered);
