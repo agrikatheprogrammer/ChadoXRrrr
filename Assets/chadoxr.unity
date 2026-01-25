@@ -213,6 +213,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 932545197216251794, guid: 8ea6960e82d7c419c93a7f4f18e7b06e, type: 3}
   m_PrefabInstance: {fileID: 1424936388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &674852814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 674852816}
+  - component: {fileID: 674852815}
+  m_Layer: 0
+  m_Name: xrinteractionman
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &674852815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674852814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.XRInteractionManager
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+--- !u!4 &674852816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674852814}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.97294, y: 0.18990001, z: -116.26799}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1119225853
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnTatami
   xrOrigin: {fileID: 531941408}
   playerCamera: {fileID: 1870341158}
-  tatamiPrefab: {fileID: 6857034286126252066, guid: 82cbaf983e17d4fc4b95a90f2466f4b8, type: 3}
+  tatamiPrefab: {fileID: 2072705621478618153, guid: 54a12dbdb727f46cc82d26abe8752ff6, type: 3}
   floorYPosition: 0
   liftAboveFloor: 0.002
   requireHandsTouchFloor: 1
@@ -566,3 +612,4 @@ SceneRoots:
   - {fileID: 134082615}
   - {fileID: 1424936388}
   - {fileID: 1552247725}
+  - {fileID: 674852816}
