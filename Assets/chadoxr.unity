@@ -774,7 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnTatami
   xrOrigin: {fileID: 531941408}
   playerCamera: {fileID: 1870341158}
-  tatamiPrefab: {fileID: 625844874068159030, guid: f2abcdbb82b074b28979245b827bdbf0, type: 3}
+  tatamiPrefab: {fileID: 4962814656294232413, guid: ad60d0a27eb284906aae838e03fdf3ef, type: 3}
   floorYPosition: 0
   liftAboveFloor: 0.002
   requireHandsTouchFloor: 1
