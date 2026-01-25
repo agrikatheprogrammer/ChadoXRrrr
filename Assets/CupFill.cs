@@ -1,23 +1,34 @@
 using UnityEngine;
-
 public class CupFill : MonoBehaviour
 {
-    [Range(0f, 1f)] public float fill = 0f;  // Current fill level between 0 (empty) and 1 (full)
-    public Renderer waterRenderer;          // Assign the Renderer of the water material in Unity
+    [Range(0f, 1f)] public float fill = 0f;  // Current fill level
+    public Renderer waterRenderer;          // Material using shader
+    public Transform waterTransform;        // Cube water object
 
-    public void AddWater(float amount01)
+    public void AddWater(float amount)
     {
-        fill = Mathf.Clamp01(fill + amount01); // Adjust the fill level between 0 and 1
+        fill = Mathf.Clamp01(fill + amount);
 
-        UpdateWaterVisual(); // Update the shader visuals
-    }
-
-    void UpdateWaterVisual()
-    {
+        // Shader effect: Update `_Fill`
         if (waterRenderer != null)
         {
-            // Update the water material shader's "_Fill" property with the current fill level
             waterRenderer.material.SetFloat("_Fill", fill);
+        }
+
+        // Physical scaling: Update water cube scale
+        if (waterTransform != null)
+        {
+            waterTransform.localScale = new Vector3(
+                waterTransform.localScale.x,
+                fill, // Scale along vertical axis
+                waterTransform.localScale.z
+            );
+            // Adjust position if necessary
+            waterTransform.localPosition = new Vector3(
+                waterTransform.localPosition.x,
+                fill / 2f, // Keep it flush with the cup
+                waterTransform.localPosition.z
+            );
         }
     }
 }
