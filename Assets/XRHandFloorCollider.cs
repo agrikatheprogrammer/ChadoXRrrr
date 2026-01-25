@@ -15,41 +15,46 @@ public class XRHandFloorCollider : MonoBehaviour
     
     void Start()
     {
-        // Create a GameObject with collider for this hand joint
-        colliderObject = new GameObject(isLeftHand ? "LeftHandCollider" : "RightHandCollider");
-        
-        // Add sphere collider (trigger)
+        // Create the trigger collider as a visible child object
+        colliderObject = new GameObject(
+            isLeftHand ? "LeftHandCollider" : "RightHandCollider");
+        colliderObject.transform.parent = this.transform;
+
+        // Add collider & Rigidbody
         var sphereCol = colliderObject.AddComponent<SphereCollider>();
-        sphereCol.radius = 0.05f; // 5cm radius
+        sphereCol.radius = 0.05f;
         sphereCol.isTrigger = true;
-        
-        // Add kinematic rigidbody
         var rb = colliderObject.AddComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;
-        
-        // Add HandScript
+
+        // Add and setup HandScript
         handScript = colliderObject.AddComponent<HandScript>();
         handScript.manager = manager;
         handScript.isLeftHand = isLeftHand;
+        
+        Debug.Log($"[{name}] Collider created for {(isLeftHand ? "left" : "right")} hand.");
     }
     
     void Update()
     {
         // Get the hand subsystem
         var subsystem = GetHandSubsystem();
-        if (subsystem == null) return;
-        
-        // Get the correct hand
-        var hand = isLeftHand ? subsystem.leftHand : subsystem.rightHand;
-        
-        // Get the joint we're tracking
-        if (hand.GetJoint(jointToTrack).TryGetPose(out var pose))
+        if (subsystem == null)
         {
-            // Move our collider to match the tracked joint position
-            colliderObject.transform.position = pose.position;
-            colliderObject.transform.rotation = pose.rotation;
+            Debug.LogWarning("No XRHandSubsystem found");
+            return;
         }
+
+        var hand = isLeftHand ? subsystem.leftHand : subsystem.rightHand;
+        if (!hand.GetJoint(jointToTrack).TryGetPose(out var pose))
+        {
+            Debug.LogWarning($"Pose not tracked for {jointToTrack}");
+            return;
+        }
+
+        colliderObject.transform.position = pose.position;
+        colliderObject.transform.rotation = pose.rotation;
     }
     
     private XRHandSubsystem GetHandSubsystem()

@@ -15,7 +15,7 @@ AnimatorState:
   - {fileID: 1618091951524508326}
   - {fileID: -8413814533224518006}
   m_StateMachineBehaviours:
-  - {fileID: -8825066349392735489}
+  - {fileID: 7304530937288939401}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -524,7 +524,7 @@ AnimatorStateMachine:
     m_Position: {x: 500, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9003021534973253982}
-    m_Position: {x: 140, y: -50, z: 0}
+    m_Position: {x: 120, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1397699602153359838}
     m_Position: {x: -280, y: 180, z: 0}
@@ -778,6 +778,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &7304530937288939401
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdca07bc65957471fba3c8757c2c4e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IdleAnimSelection
 --- !u!1102 &7459680416881785884
 AnimatorState:
   serializedVersion: 6
