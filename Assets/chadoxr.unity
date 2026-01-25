@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4253f32900bcc4d499d675566142ded0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 674852815}
   m_InteractionLayers:
     m_Bits: 4294967295
   m_Handedness: 2
@@ -501,7 +501,7 @@ Transform:
   m_GameObject: {fileID: 357223489}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: 0, z: -4.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -774,7 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnTatami
   xrOrigin: {fileID: 531941408}
   playerCamera: {fileID: 1870341158}
-  tatamiPrefab: {fileID: 4962814656294232413, guid: ad60d0a27eb284906aae838e03fdf3ef, type: 3}
+  tatamiPrefab: {fileID: 2765845727627462017, guid: c62dd20cf08ae4c5a990caf2958073c4, type: 3}
   floorYPosition: 0
   liftAboveFloor: 0.002
   requireHandsTouchFloor: 1
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4253f32900bcc4d499d675566142ded0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 674852815}
   m_InteractionLayers:
     m_Bits: 4294967295
   m_Handedness: 1
