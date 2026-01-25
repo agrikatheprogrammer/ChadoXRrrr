@@ -2,59 +2,38 @@ using UnityEngine;
 
 public class SpawnTatami : MonoBehaviour
 {
-    [Header("Hand references (drag these in)")]
-    public Transform leftPalm;
-    public Transform rightPalm;
-
     [Header("Tatami")]
     public GameObject tatamiPrefab;
-    public float tatamiSizeMeters = 3f;
 
-    [Header("Floor detection")]
-    public float raycastDownDistance = 2.0f;
-    public float palmToFloorMaxDistance = 0.08f; // 8cm
-    public float maxSlopeDegrees = 15f;          // floor check
-    public float holdTimeSeconds = 0.25f;        // require both hands held briefly
+    [Header("Rules")]
+    public float bothHandsHoldSeconds = 0.15f; // require brief simultaneous touch
+    public float liftAboveFloor = 0.002f;
 
-    [Header("Debug")]
-    public bool drawDebugRays = true;
+    bool leftOnFloor, rightOnFloor;
+    Vector3 leftPoint, rightPoint;
+    float holdTimer = 0f;
 
-    private float holdTimer = 0f;
-    private GameObject spawnedTatami;
-
-    void Start()
-    {
-        // If you want the tatami hidden until placed, DON'T place it in the scene.
-        // Only use the prefab reference above.
-    }
+    GameObject spawned;
 
     void Update()
     {
-        if (spawnedTatami != null) return;
-        if (leftPalm == null || rightPalm == null || tatamiPrefab == null) return;
-
-        bool leftOnFloor  = TryGetFloorHit(leftPalm.position, out RaycastHit leftHit);
-        bool rightOnFloor = TryGetFloorHit(rightPalm.position, out RaycastHit rightHit);
+        if (spawned != null) return;
+        if (tatamiPrefab == null) return;
 
         if (leftOnFloor && rightOnFloor)
         {
             holdTimer += Time.deltaTime;
-
-            if (holdTimer >= holdTimeSeconds)
+            if (holdTimer >= bothHandsHoldSeconds)
             {
-                Vector3 spawnPos = (leftHit.point + rightHit.point) * 0.5f;
+                Vector3 midpoint = (leftPoint + rightPoint) * 0.5f;
 
-                // Keep tatami flat on the floor (match normal)
-                Quaternion rot = Quaternion.FromToRotation(Vector3.up, leftHit.normal);
+                // Force it onto your defined floor plane y = 0
+                midpoint.y = 0f;
 
-                spawnedTatami = Instantiate(tatamiPrefab, spawnPos, rot);
+                // Flat on floor
+                Quaternion rot = Quaternion.identity;
 
-                // Optional: snap scale to 3x3m if your prefab isn't already correct
-                // (Assumes tatami mesh is 1x1 units originally; if not, remove this)
-                // spawnedTatami.transform.localScale = new Vector3(tatamiSizeMeters, 1f, tatamiSizeMeters);
-
-                // tiny lift to avoid z-fighting
-                spawnedTatami.transform.position += leftHit.normal * 0.002f;
+                spawned = Instantiate(tatamiPrefab, midpoint + Vector3.up * liftAboveFloor, rot);
             }
         }
         else
@@ -63,28 +42,17 @@ public class SpawnTatami : MonoBehaviour
         }
     }
 
-    bool TryGetFloorHit(Vector3 palmPos, out RaycastHit hit)
+    public void SetHandOnFloor(bool isLeft, bool onFloor, Vector3 contactPoint)
     {
-        hit = default;
-
-        // raycast from a little above the palm downwards
-        Vector3 origin = palmPos + Vector3.up * 0.02f;
-        Vector3 dir = Vector3.down;
-
-        if (drawDebugRays)
-            Debug.DrawRay(origin, dir * raycastDownDistance, Color.green);
-
-        if (!Physics.Raycast(origin, dir, out hit, raycastDownDistance, ~0, QueryTriggerInteraction.Ignore))
-            return false;
-
-        // Must be "floor-like" (mostly horizontal)
-        float slope = Vector3.Angle(hit.normal, Vector3.up);
-        if (slope > maxSlopeDegrees) return false;
-
-        // Palm must be close enough to the floor hit
-        float verticalDist = Mathf.Abs(origin.y - hit.point.y);
-        if (verticalDist > palmToFloorMaxDistance) return false;
-
-        return true;
+        if (isLeft)
+        {
+            leftOnFloor = onFloor;
+            leftPoint = contactPoint;
+        }
+        else
+        {
+            rightOnFloor = onFloor;
+            rightPoint = contactPoint;
+        }
     }
 }
