@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" styly="STYLY.Uploader.UI" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="screen">
+        <ui:VisualElement name="header" class="section">
+            <ui:VisualElement class="title">
+                <ui:Image class="logo" />
+                <ui:Label text="Unity plugin for STYLY" />
+            </ui:VisualElement>
+            <ui:TextElement text="Right click on a prefab and select &quot;STYLY&quot;-&quot;Upload prefab or scene to STYLY&quot;. Your prefab will appear in &quot;3D Model&quot;-&quot;My Models&quot; section in STYLY." class="textline" />
+            <ui:Box>
+                <ui:Button name="get_styly_api_key" text="Get STYLY API Key" />
+                <ui:Button name="get_started" text="Get Started" />
+            </ui:Box>
+        </ui:VisualElement>
+        <ui:VisualElement name="content" class="section">
+            <STYLY.Uploader.UI.UnityModulesErrorElement />
+            <ui:VisualElement class="inputline inputlinearea">
+                <ui:Label text="Email" />
+                <ui:TextField name="email" />
+            </ui:VisualElement>
+            <ui:VisualElement class="inputline inputlinearea">
+                <ui:Label text="API Key" />
+                <ui:TextField name="api_key" />
+            </ui:VisualElement>
+            <ui:VisualElement class="checkwithhelp inputlinearea">
+                <ui:Toggle name="azcopy_enabled" value="false" text="Enable AzCopy" />
+                <ui:Box>
+                    <ui:TextElement text="AzCopy can be used for faster upload" />
+                </ui:Box>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="footer" class="section">
+            <ui:Button name="about_styly" text="About STYLY" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
