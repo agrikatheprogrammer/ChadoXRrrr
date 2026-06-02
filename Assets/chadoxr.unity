@@ -882,11 +882,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: ladlePourRate
-      value: 0.3
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: pourSoundStartTime
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
+      propertyPath: minPourSoundSeconds
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5411597453820695671, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: m_MovementType

@@ -6,11 +6,14 @@ public class CupFillTrigger : MonoBehaviour
     public float receiveRate = 0.35f;
     public float ladlePourRate = 0.8f;
 
-    [Tooltip("A seamless looping water-stream clip. Plays ONLY while the cup is actively filling.")]
+    [Tooltip("A seamless looping water-stream clip. Plays while the cup is filling.")]
     public AudioSource pourAudio;
+    [Tooltip("Once the pour sound starts, keep playing at least this many seconds — so a fast fill still sounds like a real pour, not a short blip.")]
+    public float minPourSoundSeconds = 2.5f;
 
     private LadleWater activeLadle;
     private bool fillingThisFrame;
+    private float soundStartTime;
 
     void Awake()
     {
@@ -52,10 +55,19 @@ public class CupFillTrigger : MonoBehaviour
     {
         if (pourAudio == null) return;
 
-        if (fillingThisFrame && !pourAudio.isPlaying)
-            pourAudio.Play();
-        else if (!fillingThisFrame && pourAudio.isPlaying)
+        if (fillingThisFrame)
+        {
+            if (!pourAudio.isPlaying)
+            {
+                pourAudio.Play();
+                soundStartTime = Time.time;
+            }
+        }
+        else if (pourAudio.isPlaying && Time.time - soundStartTime >= minPourSoundSeconds)
+        {
+            // Only stop once it's been playing the minimum time, so a quick fill isn't a blip.
             pourAudio.Stop();
+        }
 
         fillingThisFrame = false;
     }
