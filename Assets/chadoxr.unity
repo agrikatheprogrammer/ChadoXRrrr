@@ -955,6 +955,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 273752355}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
+      propertyPath: receiveRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
+      propertyPath: ladlePourRate
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: pourSoundStartTime
       value: 0.5
       objectReference: {fileID: 0}
