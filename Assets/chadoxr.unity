@@ -878,7 +878,7 @@ PrefabInstance:
       objectReference: {fileID: 273752355}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: receiveRate
-      value: 0.5
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: ladlePourRate
