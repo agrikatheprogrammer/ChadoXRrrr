@@ -8,9 +8,20 @@ public class CupFillTrigger : MonoBehaviour
 
     [Tooltip("Plays ONLY while the cup is actively filling. Stops when not pouring into the cup or when the cup is full.")]
     public AudioSource pourAudio;
+    [Tooltip("Start the pour clip this many seconds in (skip an intro/silence at the start).")]
+    public float pourSoundStartTime = 1f;
 
     private LadleWater activeLadle;
     private bool fillingThisFrame;
+
+    void Awake()
+    {
+        if (pourAudio != null)
+        {
+            pourAudio.loop = false;        // no loop — we re-trigger from the start time instead
+            pourAudio.playOnAwake = false;
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -44,7 +55,12 @@ public class CupFillTrigger : MonoBehaviour
         if (pourAudio == null) return;
 
         if (fillingThisFrame && !pourAudio.isPlaying)
+        {
+            // Start partway into the clip (skip intro/silence). Clamp to a valid time.
+            if (pourAudio.clip != null)
+                pourAudio.time = Mathf.Clamp(pourSoundStartTime, 0f, Mathf.Max(0f, pourAudio.clip.length - 0.05f));
             pourAudio.Play();
+        }
         else if (!fillingThisFrame && pourAudio.isPlaying)
             pourAudio.Stop();
 
