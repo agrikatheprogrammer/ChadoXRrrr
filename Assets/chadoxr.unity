@@ -368,10 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 273752357}
-  - component: {fileID: 273752356}
   - component: {fileID: 273752355}
-  - component: {fileID: 273752354}
-  - component: {fileID: 273752353}
   m_Layer: 0
   m_Name: '[BuildingBlock] Spatial Audio (2)'
   m_TagString: Untagged
@@ -379,30 +376,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &273752353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273752352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796f04c5a94947649c2235acef0008ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.Audio::MetaXRAudioSourceExperimentalFeatures
---- !u!114 &273752354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273752352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07f270ac36c49789466c75ceb88424c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.Audio::MetaXRAudioSource
 --- !u!82 &273752355
 AudioSource:
   m_ObjectHideFlags: 0
@@ -422,7 +395,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 136
+  Priority: 147
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -500,18 +473,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &273752356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273752352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
 --- !u!4 &273752357
 Transform:
   m_ObjectHideFlags: 0
@@ -520,12 +481,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273752352}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.40248132, y: 0.4024814, z: 0.4024814}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1658745582}
+  m_Father: {fileID: 1300610253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &357223489
 GameObject:
@@ -536,10 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357223494}
-  - component: {fileID: 357223493}
   - component: {fileID: 357223492}
-  - component: {fileID: 357223491}
-  - component: {fileID: 357223490}
   m_Layer: 0
   m_Name: '[BuildingBlock] Spatial Audio'
   m_TagString: Untagged
@@ -547,30 +505,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &357223490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357223489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796f04c5a94947649c2235acef0008ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.Audio::MetaXRAudioSourceExperimentalFeatures
---- !u!114 &357223491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357223489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07f270ac36c49789466c75ceb88424c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.Audio::MetaXRAudioSource
 --- !u!82 &357223492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -668,18 +602,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &357223493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357223489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
 --- !u!4 &357223494
 Transform:
   m_ObjectHideFlags: 0
@@ -956,7 +878,7 @@ PrefabInstance:
       objectReference: {fileID: 273752355}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: receiveRate
-      value: 1
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4815877094234760206, guid: 1ce372245315545699bd285662d124cd, type: 3}
       propertyPath: ladlePourRate
@@ -1134,8 +1056,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 865897066242490851, guid: 1ce372245315545699bd285662d124cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1245585786}
-    - targetCorrespondingSourceObject: {fileID: 2681975749556458214, guid: 1ce372245315545699bd285662d124cd, type: 3}
-      insertIndex: 0
+    - targetCorrespondingSourceObject: {fileID: 865897066242490851, guid: 1ce372245315545699bd285662d124cd, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 273752357}
     - targetCorrespondingSourceObject: {fileID: 2681975749556458214, guid: 1ce372245315545699bd285662d124cd, type: 3}
       insertIndex: -1
@@ -1178,10 +1100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 893298434}
-  - component: {fileID: 893298433}
   - component: {fileID: 893298432}
-  - component: {fileID: 893298431}
-  - component: {fileID: 893298430}
   m_Layer: 0
   m_Name: '[BuildingBlock] Spatial Audio (1)'
   m_TagString: Untagged
@@ -1189,30 +1108,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &893298430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893298429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796f04c5a94947649c2235acef0008ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.Audio::MetaXRAudioSourceExperimentalFeatures
---- !u!114 &893298431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893298429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07f270ac36c49789466c75ceb88424c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.Audio::MetaXRAudioSource
 --- !u!82 &893298432
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1310,18 +1205,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &893298433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893298429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
 --- !u!4 &893298434
 Transform:
   m_ObjectHideFlags: 0
