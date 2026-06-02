@@ -520,12 +520,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273752352}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: -4.52}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0.23924696, y: 1.3468915, z: -0.05559856}
+  m_LocalScale: {x: 0.40248132, y: 0.4024814, z: 0.4024814}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1658745582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &357223489
 GameObject:
@@ -1114,6 +1114,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1245585786}
     - targetCorrespondingSourceObject: {fileID: 2681975749556458214, guid: 1ce372245315545699bd285662d124cd, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 273752357}
+    - targetCorrespondingSourceObject: {fileID: 2681975749556458214, guid: 1ce372245315545699bd285662d124cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 374105655}
     - targetCorrespondingSourceObject: {fileID: 994943952475200368, guid: 1ce372245315545699bd285662d124cd, type: 3}
@@ -1132,6 +1135,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3347188344029579356, guid: 1ce372245315545699bd285662d124cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1658745592}
+    - targetCorrespondingSourceObject: {fileID: 3347188344029579356, guid: 1ce372245315545699bd285662d124cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1658745593}
     - targetCorrespondingSourceObject: {fileID: 469800343002497482, guid: 1ce372245315545699bd285662d124cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 20648114}
@@ -1991,6 +1997,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StickyGrab
   graceSeconds: 0.4
+--- !u!114 &1658745593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658745581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc2fe46dc8be4868b61377db4f30f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PourSound
+  ladle: {fileID: 1658745583}
+  audioSource: {fileID: 273752355}
+  loopWhilePouring: 1
 --- !u!1 &1855951637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,6 +2368,5 @@ SceneRoots:
   - {fileID: 1552247725}
   - {fileID: 357223494}
   - {fileID: 893298434}
-  - {fileID: 273752357}
   - {fileID: 875780790}
   - {fileID: 2134211745}
