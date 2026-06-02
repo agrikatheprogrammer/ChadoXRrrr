@@ -71,62 +71,27 @@ public class SetoAnimationTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //Open Scene
-            anim.SetTrigger("Animation_01");
-            
-        }
+        if (anim == null) return;
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            //Joyful
-            anim.SetTrigger("Animation_02");
-        }
+        // Drive the facial expression from the current animation clip.
+        // Guard against an empty layer (Animator has no clip this frame, e.g. Timeline-driven)
+        // so we never index an empty array — that was throwing every frame and tanking FPS.
+        var clipInfo = anim.GetCurrentAnimatorClipInfo(0);
+        if (clipInfo.Length == 0 || clipInfo[0].clip == null) return;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //Disappointed
-            anim.SetTrigger("Animation_03");
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            //Angry
-            anim.SetTrigger("Animation_04");
-        }
-
-        
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-
-            anim.SetLayerWeight(layerIndexWalk, 1);
-
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-
-            anim.SetLayerWeight(layerIndexWalk, 0);
-
-        }
-        
-        //Expression
-        AnimatorClipInfo[] m_CurrentClipInfo = anim.GetCurrentAnimatorClipInfo(0);
-        string m_ClipName = m_CurrentClipInfo[0].clip.name;
+        string m_ClipName = clipInfo[0].clip.name;
         if (m_ClipName.Contains("StandCoverToLook") || m_ClipName.Contains("LookAround") || m_ClipName.Contains("Joyful Jump"))
         {
             ShowHappy();
-        
-        }else if (m_ClipName.Contains("Angry") || m_ClipName.Contains("Disappointed"))
+        }
+        else if (m_ClipName.Contains("Angry") || m_ClipName.Contains("Disappointed"))
         {
             ShowAngry();
-
         }
         else
         {
             ShowNormal();
         }
-        
     }
     
     private void HideAllExpression()

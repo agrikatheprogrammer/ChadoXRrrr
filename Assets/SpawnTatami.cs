@@ -25,57 +25,38 @@ public class SpawnTatami : MonoBehaviour
 
     void Start()
     {
-        // Auto-find camera
         if (playerCamera == null && Camera.main != null)
             playerCamera = Camera.main.transform;
-            
-        // Auto-find XR Origin
+
         if (xrOrigin == null)
         {
             var xrOriginComponent = FindFirstObjectByType<Unity.XR.CoreUtils.XROrigin>();
             if (xrOriginComponent != null)
                 xrOrigin = xrOriginComponent.transform;
         }
-        
-        Debug.Log("🎋 TatamiManager initialized!");
     }
 
     void Update()
     {
-        if (spawned != null) return; // Already spawned
-        if (tatamiPrefab == null) return; // No prefab assigned
+        if (spawned != null || tatamiPrefab == null) return;
 
-        // Method 1: Hand collision trigger
         if (requireHandsTouchFloor)
         {
             if (leftHandOnFloor && rightHandOnFloor)
             {
                 holdTimer += Time.deltaTime;
-                
                 if (holdTimer >= bothHandsHoldSeconds)
-                {
-                    Debug.Log($"⏱️ Both hands held for {holdTimer:F2}s - SPAWNING!");
                     SpawnAtPlayerFeet();
-                }
             }
             else
             {
-                // Reset timer if hands not both on floor
-                if (holdTimer > 0)
-                {
-                    holdTimer = 0f;
-                    Debug.Log("⏱️ Timer reset - both hands not on floor");
-                }
+                holdTimer = 0f;
             }
         }
-        // Method 2: Keyboard trigger (for testing)
         else
         {
             if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
-            {
-                Debug.Log("⌨️ SPACEBAR pressed - SPAWNING!");
                 SpawnAtPlayerFeet();
-            }
         }
     }
 
@@ -93,27 +74,12 @@ public class SpawnTatami : MonoBehaviour
                 rotation = Quaternion.LookRotation(forward);
         }
 
-        // Spawn tatami mat
         spawned = Instantiate(tatamiPrefab, spawnPosition, rotation);
-        Debug.Log($"✅ Tatami spawned at: {spawnPosition}");
     }
 
-    // THIS METHOD IS CALLED BY HandScript
     public void SetHandOnFloor(bool isLeft, bool onFloor, Vector3 contactPoint)
     {
-        if (isLeft)
-        {
-            leftHandOnFloor = onFloor;
-            leftPoint = contactPoint;
-            Debug.Log($"🟢 LEFT hand on floor: {onFloor} at {contactPoint}");
-        }
-        else
-        {
-            rightHandOnFloor = onFloor;
-            rightPoint = contactPoint;
-            Debug.Log($"🔵 RIGHT hand on floor: {onFloor} at {contactPoint}");
-        }
-        
-        Debug.Log($"📊 Current state - Left:{leftHandOnFloor}, Right:{rightHandOnFloor}");
+        if (isLeft) { leftHandOnFloor = onFloor; leftPoint = contactPoint; }
+        else        { rightHandOnFloor = onFloor; rightPoint = contactPoint; }
     }
 }

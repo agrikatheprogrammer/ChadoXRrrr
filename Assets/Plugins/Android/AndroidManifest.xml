@@ -15,5 +15,8 @@
     <meta-data android:name="com.oculus.supportedDevices" android:value="quest2|questpro|quest3|quest3s" tools:replace="android:value" />
   </application>
   <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
+  <!-- Hand tracking: permission + feature. required="false" so the app still runs with controllers. -->
+  <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
+  <uses-feature android:name="oculus.software.handtracking" android:required="false" />
   <horizonos:uses-horizonos-sdk horizonos:minSdkVersion="60" horizonos:targetSdkVersion="83" />
 </manifest>

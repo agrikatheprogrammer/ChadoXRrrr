@@ -6,14 +6,20 @@ public class LadleWater : MonoBehaviour
 
     public bool HasWater => amount > 0.01f;
 
-    // Infinite kettle: just set to full instantly
+    // Infinite kettle fallback: set to full instantly
     public void FillInstant() => amount = 1f;
+
+    // Add water (used when scooping from a finite kettle)
+    public void Add(float a) => amount = Mathf.Clamp01(amount + a);
+
+    [Tooltip("Pour once the ladle is tilted more than this many degrees from upright. Works whichever way you rotate it (clockwise OR counter-clockwise).")]
+    public float pourTiltAngle = 55f;
 
     public bool IsPouringDown()
     {
-        // Change axis if your ladle model is oriented differently
-        // This says: if ladle "up" points downward enough, it's pouring
-        return Vector3.Dot(transform.up, Vector3.down) > 0.4f;
+        // How far the ladle is tilted from upright, regardless of rotation direction.
+        // Clockwise or counter-clockwise both pour once past pourTiltAngle.
+        return Vector3.Angle(transform.up, Vector3.up) > pourTiltAngle;
     }
 
     public float Pour(float dt, float rate)

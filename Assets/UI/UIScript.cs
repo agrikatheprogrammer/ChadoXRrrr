@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using NaughtyAttributes;
@@ -35,6 +34,10 @@ public class UIScript : MonoBehaviour
     
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClickSound;
+
+    [Header("Events")]
+    [Tooltip("Fired when the whole narration finishes. Wire to CeremonyDirector.Finish.")]
+    public UnityEvent onNarrationFinished;
 
     private int currentIndex = 0;
     private int currentSetIndex = 0; // 0 = sprites, 1 = actionSprites
@@ -194,7 +197,8 @@ public class UIScript : MonoBehaviour
         // - Save progress
         // - Unlock rewards
         // - etc.
-        
+
+        onNarrationFinished?.Invoke();
         gameObject.SetActive(false);
     }
 
@@ -264,10 +268,8 @@ public class UIScript : MonoBehaviour
     Sprite[] GetCurrentSpriteSet()
     {
         if (currentSetIndex >= 0 && currentSetIndex < spriteSets.Length)
-        {
             return spriteSets[currentSetIndex];
-        }
-        return new Sprite[0];
+        return System.Array.Empty<Sprite>();
     }
 
     AudioClip[] GetCurrentVoiceClipSet()

@@ -1,66 +1,62 @@
 using UnityEngine;
 using UnityEngine.XR.Hands;
+using System.Collections.Generic;
 
 public class XRHandFloorCollider : MonoBehaviour
 {
     [Header("Setup")]
     public SpawnTatami manager;
     public bool isLeftHand;
-    
+
     [Header("Which joint to track (recommend Palm or IndexTip)")]
     public XRHandJointID jointToTrack = XRHandJointID.Palm;
-    
+
     private GameObject colliderObject;
-    private HandScript handScript;
-    
+    private XRHandSubsystem handSubsystem;
+
+    // Reused across CacheHandSubsystem calls to avoid per-call allocation
+    private static readonly List<XRHandSubsystem> s_SubsystemScratch = new List<XRHandSubsystem>();
+
     void Start()
     {
-        // Create the trigger collider as a visible child object
-        colliderObject = new GameObject(
-            isLeftHand ? "LeftHandCollider" : "RightHandCollider");
-        colliderObject.transform.parent = this.transform;
+        colliderObject = new GameObject(isLeftHand ? "LeftHandCollider" : "RightHandCollider");
+        colliderObject.transform.parent = transform;
 
-        // Add collider & Rigidbody
         var sphereCol = colliderObject.AddComponent<SphereCollider>();
         sphereCol.radius = 0.05f;
         sphereCol.isTrigger = true;
+
         var rb = colliderObject.AddComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;
 
-        // Add and setup HandScript
-        handScript = colliderObject.AddComponent<HandScript>();
+        var handScript = colliderObject.AddComponent<HandScript>();
         handScript.manager = manager;
         handScript.isLeftHand = isLeftHand;
-        
-        Debug.Log($"[{name}] Collider created for {(isLeftHand ? "left" : "right")} hand.");
+
+        CacheHandSubsystem();
     }
-    
+
+    void OnEnable() => CacheHandSubsystem();
+
+    void CacheHandSubsystem()
+    {
+        s_SubsystemScratch.Clear();
+        SubsystemManager.GetSubsystems(s_SubsystemScratch);
+        handSubsystem = s_SubsystemScratch.Count > 0 ? s_SubsystemScratch[0] : null;
+    }
+
     void Update()
     {
-        // Get the hand subsystem
-        var subsystem = GetHandSubsystem();
-        if (subsystem == null)
+        if (handSubsystem == null)
         {
-            Debug.LogWarning("No XRHandSubsystem found");
+            CacheHandSubsystem();
             return;
         }
 
-        var hand = isLeftHand ? subsystem.leftHand : subsystem.rightHand;
-        if (!hand.GetJoint(jointToTrack).TryGetPose(out var pose))
-        {
-            Debug.LogWarning($"Pose not tracked for {jointToTrack}");
-            return;
-        }
+        var hand = isLeftHand ? handSubsystem.leftHand : handSubsystem.rightHand;
+        if (!hand.GetJoint(jointToTrack).TryGetPose(out var pose)) return;
 
-        colliderObject.transform.position = pose.position;
-        colliderObject.transform.rotation = pose.rotation;
-    }
-    
-    private XRHandSubsystem GetHandSubsystem()
-    {
-        var subsystems = new System.Collections.Generic.List<XRHandSubsystem>();
-        SubsystemManager.GetSubsystems(subsystems);
-        return subsystems.Count > 0 ? subsystems[0] : null;
+        colliderObject.transform.SetPositionAndRotation(pose.position, pose.rotation);
     }
 }

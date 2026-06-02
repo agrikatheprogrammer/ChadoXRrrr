@@ -1,14 +1,19 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class XRInteractorTriggerForwarder : MonoBehaviour
 {
-    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor;
+    public XRBaseInteractor interactor;
+
+    private Collider cachedCollider;
+
     void Awake()
     {
-        if (interactor == null) interactor = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor>();
+        if (interactor == null) interactor = GetComponent<XRBaseInteractor>();
         if (interactor != null)
         {
+            cachedCollider = interactor.GetComponentInChildren<Collider>();
             interactor.selectEntered.AddListener(OnSelectEntered);
             interactor.selectExited.AddListener(OnSelectExited);
         }
@@ -27,20 +32,13 @@ public class XRInteractorTriggerForwarder : MonoBehaviour
     {
         var go = args.interactableObject?.transform?.gameObject;
         if (go == null) return;
-        // Try to call the same method your trigger-based buttons expect
-        go.SendMessage("OnTriggerEnter", GetInteractorCollider(), SendMessageOptions.DontRequireReceiver);
+        go.SendMessage("OnTriggerEnter", cachedCollider, SendMessageOptions.DontRequireReceiver);
     }
 
     void OnSelectExited(SelectExitEventArgs args)
     {
         var go = args.interactableObject?.transform?.gameObject;
         if (go == null) return;
-        go.SendMessage("OnTriggerExit", GetInteractorCollider(), SendMessageOptions.DontRequireReceiver);
-    }
-
-    Collider GetInteractorCollider()
-    {
-        // return any Collider on the interactor to mimic physics callback param (may be null)
-        return interactor.transform.GetComponentInChildren<Collider>();
+        go.SendMessage("OnTriggerExit", cachedCollider, SendMessageOptions.DontRequireReceiver);
     }
 }

@@ -2,20 +2,29 @@ using UnityEngine;
 
 public class CupFillTrigger : MonoBehaviour
 {
-    public CupFill cup; // Reference to the CupFill script
-    public float receiveRate = 0.35f;      // Speed at which the cup fills (0..1 per second)
-    public float ladlePourRate = 0.8f;    // Speed at which the ladle drains (0..1 per second)
+    public CupFill cup;
+    public float receiveRate = 0.35f;
+    public float ladlePourRate = 0.8f;
+
+    private LadleWater activeLadle;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (activeLadle == null)
+            activeLadle = other.GetComponentInParent<LadleWater>();
+    }
 
     void OnTriggerStay(Collider other)
     {
-        // Ensure a ladle with water is pouring into the cup
-        var ladle = other.GetComponentInParent<LadleWater>();
-        if (ladle == null || !ladle.HasWater || !ladle.IsPouringDown()) return;
+        if (activeLadle == null || !activeLadle.HasWater || !activeLadle.IsPouringDown()) return;
 
-        float dt = Time.deltaTime;
+        float poured = activeLadle.Pour(Time.deltaTime, ladlePourRate);
+        cup.AddWater(poured * receiveRate);
+    }
 
-        // Move water from the ladle to the cup
-        float poured = ladle.Pour(dt, ladlePourRate);
-        cup.AddWater(poured * receiveRate); // Fill the cup dynamically
+    void OnTriggerExit(Collider other)
+    {
+        if (activeLadle != null && other.GetComponentInParent<LadleWater>() == activeLadle)
+            activeLadle = null;
     }
 }
